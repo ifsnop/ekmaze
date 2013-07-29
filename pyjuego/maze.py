@@ -3,7 +3,6 @@
 
 import numpy
 from numpy.random import random_integers as rand
-import matplotlib.pyplot as pyplot
 
 #constants 
 MAPA_OCUPADO = 1
