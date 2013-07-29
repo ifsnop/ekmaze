@@ -25,8 +25,8 @@ MAPA_BESTIA = 6
 
 TW, TH = 32, 32     #Ancho y largo de los tiles.
 
-complejidad = 0.04
-densidad = 0.04
+complejidad = 0.10
+densidad = 0.20
 nivel = 0
 
 class EscenaJuego(Escena):
@@ -94,21 +94,18 @@ class EscenaJuego(Escena):
         
         self.codigos = {
             1: (self.crear_jugador, None),
-            #4: (self.bruja_maldita, None),
-            #5: (self.alter_ego, None),
-            #6: (self.paladin, None),
             4: (self.no_muerto, None),
         }
         self.motor.load_images(imagenes)
         self.motor.run_codes(self.codigos, (0, 0, 16, 16))
         self.puntos = puntos
-        self.rubies = 0
+        self.puertas = 0
         
-        #Conteo inicial de rubíes.
+        #Conteo inicial de puertas.
         for linea in self.motor.tlayer:
             for tile in linea:
                 if tile == 4:
-                    self.rubies += 1
+                    self.puertas += 1
         
     def crear_jugador(self, motor, tile, valor):
         "Función para crear el sprite animado del jugador."
@@ -154,7 +151,7 @@ class EscenaJuego(Escena):
             
     def recoge_ruby(self, motor, tile, sprite):
         self.puntos += 100
-        self.rubies -= 1
+        self.puertas -= 1
         motor.set((tile.tx, tile.ty), 0)
         
     def mover_jugador(self, motor, sprite):
@@ -190,8 +187,8 @@ class EscenaJuego(Escena):
             self.cambiar_escena(EscenaJuego(self.puntos))
         else:
             nivel = 0
-            complejidad = 0.04
-            densidad = 0.04
+            complejidad = 0.10
+            densidad = 0.20
             
             puntuaciones = High('media/puntuaciones/normal.dat')
             if puntuaciones.check(self.puntos) == None:
@@ -202,7 +199,7 @@ class EscenaJuego(Escena):
                 
     def actualizar(self):
         "Actualiza los objetos del juego."
-        if self.rubies:
+        if self.puertas:
             self.motor.loop()
         else:
             self.juego_terminado(None, None, None)
@@ -211,28 +208,30 @@ class EscenaJuego(Escena):
         "Dibujar objetos en pantalla."
         
         self.motor.paint(pantalla)
-        
-        #coords = []
-        #for sprite in self.motor.sprites:
-        #    coords.append([sprite.rect.x,sprite.rect.y])
-            
+
         fuente = p.font.Font(None, 36)
         puntuacion = fuente.render('%07d' % self.puntos, True, (255,255,255))
         x = pantalla.get_size()[0] - puntuacion.get_width()
         y = pantalla.get_size()[1] - puntuacion.get_height()
         pantalla.blit(puntuacion, (x, y))
-                
-        #s = p.Surface((480, 480), flags=p.SRCALPHA)
-        #for x in range(0,480,8):
-        #    for y in range(0,480,8):
-        #        fog = math.sqrt((x-coords[0][0])*(x-coords[0][0]) + (x-coords[0][1])*(x-coords[0][1]))*255.0/480.0
-        #        fog = math.floor(fog)
-        #        p.draw.line(s, (0, 0, 0, fog), (x, y), (x+8, y+8)) 
-        #        
-        #pantalla.blit(s, (32, 32))
-                
         
-        
+        # fog of war
+        # get coordinates from player current pos
+        for sprite in self.motor.sprites:
+            if sprite.imglists[0][0] =='lp_s1':
+                coords = [sprite.rect.x,sprite.rect.y]
+                break
+
+        s = p.Surface((480, 480), flags=p.SRCALPHA)
+        for y in range(0, 480, 16):
+            for x in range(0, 480, 16):
+                fog1 = (x-coords[0])*(x-coords[0]) + (y-coords[1])*(y-coords[1])
+                fog = fog1/200
+                if fog > 225:
+                    fog = 225
+                p.draw.rect(s, (0, 0, 0, fog), (x, y, 16, 16), 16)
+
+        pantalla.blit(s, (32, 32))
 
 class EscenaInicio(Escena):
     "Escena inicial del videojuego."
@@ -319,8 +318,8 @@ class EscenaJuegoTerminado(Escena):
         self.opc = -1
         #Puntación
         self.puntos = puntos
-        complejidad = 0.01
-        densidad = 0.01
+        complejidad = 0.10
+        densidad = 0.20
         
         
     def leer_eventos(self, eventos):
