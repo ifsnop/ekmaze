@@ -1,0 +1,43 @@
+
+EKMaze
+
+Adéntrate en las profundidades del laberinto, atraviesa las puertas 
+de lo oculto hasta llegar al corazón de las minas del rey muerto.
+Enfréntate a él y recupera sus riquezas perdidas. Reconócelo, estás
+en esto sólo por dinero. Usa los cursores y... ¡suerte!
+
+Go into the depths of the labyrinth, through the doors of the hidden
+to reach the undead king's mines. Face him and recover his lost
+treasures. Accept it, its all about the money. Use the cursor and...
+good luck!
+
+This is a game mixed for the Euskal Encounter 21 FOSS contest.
+
+SOURCES
+
+Pygame
+http://www.pygame.org/
+
+PGU - Phil's pyGame Utilities - 0.16
+http://www.pygame.org/project/108/
+
+pyjuego: Conjunto de módulos para Pygame. 
+http://code.google.com/p/pyjuego/
++PykittenSprite
+
+Atwood/Tutorial de PGU
+http://www.pygame.org/project-Atwood-2236-.html
+
+Maze generation algorithm
+http://en.wikipedia.org/wiki/Maze_generation_algorithm
+
+RESOURCES
+
+Background:
+http://www.flickr.com/photos/badcrc/7675762064/sizes/c/in/photolist-cGhhDf-cGhjqu-cGhiAA-cGhiJN-cGhjYE-cGhmuy-cGhh5Q-cGhiGj-cGhmpG-cGhnpG-cGhmbE-cGhmQY-cGhii3-cGhk5Q-cGhn2U-cGhhkN-cGhjCA-cGhm6b-cGhjF7-cGhkpw-cGhm8W-cGhmDQ-cGhnCQ-cGhiou-cGhhbL-cGhjT1-cGhkFb-cGhjtm-cGhkm9-cGhmgY-cGhjA7-cGhmZo-cGhkHo-cGhmeu-cGhnju-cGhixE-cGhkcy-cGhheN-cGhhoL-cGhjgU-cGhk7N-cGhm35-cGhnVQ-cGhnPy-cGhhKy-cGhk3q-cGhkaw-cGhmN3-cGhmWG-a6XgBA-a6UnrD/
+
+Stone:
+https://commons.wikimedia.org/wiki/File:Diorite.jpg
+
+Sprite:
+http://www.rpgmakervx.net/lofiversion/index.php/t45371.html
